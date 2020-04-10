@@ -1,6 +1,6 @@
 using tabuleiro;
 
-namespace xadrez_basic.tabuleiro
+namespace tabuleiro
 {
     public class Peca
     {
@@ -9,9 +9,9 @@ namespace xadrez_basic.tabuleiro
         public int QtdeMovimento { get; protected set; }
         public Tabuleiro Tabuleiro { get; protected set; }
 
-        public Peca(Posicao posicao, Tabuleiro tabuleiro, Cor cor)
+        public Peca(Tabuleiro tabuleiro, Cor cor)
         {
-            Posicao = posicao;
+            Posicao = null;
             Tabuleiro = tabuleiro;
             Cor = cor;
             QtdeMovimento = 0;
