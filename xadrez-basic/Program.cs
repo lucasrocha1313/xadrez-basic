@@ -11,15 +11,9 @@ namespace xadrez_basic
             try
             {
 
-                var tab = new Tabuleiro(8,8);
-
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(0,0));
-                tab.ColocarPeca(new Torre(tab, Cor.Preta), new Posicao(1,9));
-                tab.ColocarPeca(new Rei(tab, Cor.Preta), new Posicao(0,1));
-
-                Tela.ImprimirTabuleiro(tab);
-
-                Console.ReadLine();
+                var pos = new PosicaoXadrez('C', 7);
+                Console.WriteLine(pos);
+                Console.WriteLine(pos.toPosicao());
             }
             catch(TabuleiroException e)
             {
