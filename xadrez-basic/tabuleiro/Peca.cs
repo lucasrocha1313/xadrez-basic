@@ -2,7 +2,7 @@ using tabuleiro;
 
 namespace tabuleiro
 {
-    public class Peca
+    public abstract class Peca
     {
         public Posicao Posicao { get; set; }
         public Cor Cor { get; protected set; }
@@ -21,5 +21,14 @@ namespace tabuleiro
         {
             QtdeMovimento++;
         }
+
+        public bool PodeMover(Posicao posicao)
+        {
+            var pecaNaPosicao = Tabuleiro.ObterPeca(posicao);
+
+            return pecaNaPosicao == null || pecaNaPosicao.Cor != Cor;
+        }
+
+        public abstract bool[,] MovimentosPossiveis();
     }
 }
