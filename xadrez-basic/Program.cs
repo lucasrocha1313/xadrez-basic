@@ -14,25 +14,40 @@ namespace xadrez_basic
                 
                 while(!partidaXadrez.Terminada)
                 {
-                    Console.Clear();
-                    Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro);
+                    try
+                    {
+                        Console.Clear();
+                        Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro);
+                        Console.WriteLine();
+                        Console.WriteLine("Turno: " + partidaXadrez.turno);
+                        Console.WriteLine("Aguardando jogada: " + partidaXadrez.jogadorAtual);
 
-                    Console.WriteLine();
-                    Console.Write("Origem (coluna e linha):");
-                    Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
+                        Console.WriteLine();
+                        Console.Write("Origem (coluna e linha):");
+                        Posicao origem = Tela.LerPosicaoXadrez().toPosicao();
 
-                    var pecaEscolhida = partidaXadrez.Tabuleiro.ObterPeca(origem);
+                        partidaXadrez.ValidarPosicaoOrigem(origem);
+
+                        var pecaEscolhida = partidaXadrez.Tabuleiro.ObterPeca(origem);
+                        
+                        var posicoesPossiveis = pecaEscolhida.MovimentosPossiveis();
+
+                        Console.Clear();
+                        Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro, posicoesPossiveis);
+
+                        Console.WriteLine();
+                        Console.Write("Destino (coluna e linha):");
+                        Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
+                        partidaXadrez.ValidarPosicaoDestino(origem, destino);
+                        
+                        partidaXadrez.RealizaJogada(origem, destino);
+                    }
+                    catch(TabuleiroException e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.ReadLine();
+                    }
                     
-                    var posicoesPossiveis = pecaEscolhida.MovimentosPossiveis();
-
-                    Console.Clear();
-                    Tela.ImprimirTabuleiro(partidaXadrez.Tabuleiro, posicoesPossiveis);
-
-                    Console.WriteLine();
-                    Console.Write("Destino (coluna e linha):");
-                    Posicao destino = Tela.LerPosicaoXadrez().toPosicao();
-
-                    partidaXadrez.ExecutarMovimento(origem, destino);
                 }
 
             }
